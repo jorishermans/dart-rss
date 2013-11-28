@@ -1,6 +1,11 @@
 library dart_rss;
 
+import 'dart:async';
 import 'package:xmlstream/xmlstream.dart';
+
+part 'rss/rss_item.dart';
+part 'rss/rss_item_processor.dart';
+part 'rss/rss_parser.dart';
 
 void main() {
   var raw_xml = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -35,47 +40,8 @@ void main() {
     <media:thumbnail url="http://static2.demorgen.be/static/photo/2013/5/14/9/20131127210358/media_s_6291969.jpg" />
     </media:content>
     </item>''';
-  var xmlStreamer = new XmlStreamer(raw_xml);
-  var xmlObjectBuilder = new XmlObjectBuilder<Item>(xmlStreamer, new ItemProcessor());
-  
-  xmlObjectBuilder.onProcess().listen((e) => print("listen: $e"));
+  var rssParser = new RssParser(raw_xml);
+
+  rssParser.onProcess().listen((e) => print("listen: $e"));
 }
 
-class ItemProcessor extends XmlProcessor<Item> {
-  
-  ItemProcessor() {
-    tagName = "item";
-  }
-  
-  void onOpenTag(String tag) {
-     element = new Item();
-  }
-  
-  void onScopedCharacters(String text) {
-    if (currentTag=="title") {
-      element.title = text;
-    }
-    if (currentTag=="link") {
-      element.link = text;
-    }
-    if (currentTag=="description") {
-      element.description = text;
-    }
-    if (currentTag=="pubDate") {
-      element.pubDate = text;
-    }
-    if (currentTag=="author") {
-      element.author = text;
-    }
-  }
-}
-
-class Item {
-  String title;
-  String link;
-  String description;
-  String pubDate;
-  String author;
-  
-  String toString() => "$title - $link - $description";
-}
