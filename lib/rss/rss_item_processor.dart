@@ -1,6 +1,16 @@
 part of dart_rss;
 
-class RssItemProcessor extends XmlProcessor<RssItem> {
+class RssItemProcessor extends XmlParentProcessor<RssItem> {
+  
+  MediaContentProcessor mediaContentProcessor;
+  
+  void registerProcessors() {
+    mediaContentProcessor = new MediaContentProcessor(); 
+    mediaContentProcessor.onProcess().listen((value) { 
+      if (isScope()) element.add(value); 
+    });
+    add(mediaContentProcessor);
+  }
   
   RssItemProcessor() {
     tagName = "item";
