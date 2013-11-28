@@ -1,5 +1,5 @@
 name: rss
-version: 0.0.2
+version: 0.1.0
 author: Joris Hermans <hermansj@gmail.com>
 description: Rss parser for dart.
 homepage: https://github.com/jorishermans/dart-rss
