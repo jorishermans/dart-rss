@@ -32,6 +32,13 @@ void main() {
     <media:content type="image/jpeg" url="http://static2.demorgen.be/static/photo/2013/5/14/9/20131127210358/media_s_6291969.jpg">
     <media:thumbnail url="http://static2.demorgen.be/static/photo/2013/5/14/9/20131127210358/media_s_6291969.jpg" />
     </media:content>
+    </item>
+    <item>
+    <title>Zo zag uw gemeente eruit in de 18de eeuw</title>
+    <link>http://www.nieuwsblad.be/article/detail.aspx?articleid=dmf20131128_00861347</link>
+    <guid isPermaLink="true">http://www.nieuwsblad.be/article/detail.aspx?articleid=dmf20131128_00861347</guid>
+    <enclosure url="http://1.nieuwsbladcdn.be/Assets/Images_Upload/2013/11/28/6f6dc826-5838-11e3-8fbd-aff235d9925f_web_scale_0.6198347_0.6198347__.jpg" length="0" type="image/jpeg" />
+    <pubDate>Thu, 28 Nov 2013 15:00:00 GMT</pubDate>
     </item>''';
   var rssParser = new RssParser(raw_xml);
 
