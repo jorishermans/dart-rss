@@ -1,0 +1,59 @@
+import 'package:unittest/unittest.dart';
+import 'package:rss/dart_rss.dart';
+
+void main() {
+  var raw_xml = '''<?xml version="1.0" encoding="UTF-8"?>
+      <rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:media="http://search.yahoo.com/mrss/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+      <channel>
+      <title>De Morgen: Home</title>
+      <link>http://www.demorgen.be</link>
+      <description>Home</description>
+      <language>nl-BE</language>
+      <copyright>de Persgroep Publishing NV</copyright>
+      <pubDate>Wed, 27 Nov 2013 20:33:30 GMT</pubDate>
+      <lastBuildDate>Wed, 27 Nov 2013 20:33:30 GMT</lastBuildDate>
+      <item>
+      <title>CD&amp;V wil één Vlaamse energiepremie</title>
+      <link>http://www.demorgen.be/dm/nl/5036/Binnenland/article/detail/1748273/2013/11/27/CD-V-wil-een-Vlaamse-energiepremie.dhtml</link>
+      <description>CD&amp;amp;V pleit ervoor om het bestaande Vlaamse premiestelsel te hervormen en te vervangen door &amp;eacute;&amp;eacute;n Vlaamse energiepremie. Daarnaast ...</description>
+      <pubDate>Wed, 27 Nov 2013 20:21:00 GMT</pubDate>
+      <author>redactie</author>
+      <guid isPermaLink="false">http://www.demorgen.be/dm/nl/5036/Binnenland/article/detail/1748273/2013/11/27/CD-V-wil-een-Vlaamse-energiepremie.dhtml</guid>
+      <media:content type="image/jpeg" url="http://static2.demorgen.be/static/photo/2013/14/10/11/20131127211940/media_s_6292016.jpg">
+      <media:thumbnail url="http://static2.demorgen.be/static/photo/2013/14/10/11/20131127211940/media_s_6292016.jpg" />
+      </media:content>
+      </item>
+      <item>
+      <title>Scheenbeenbreuk voor wereldkampioen hink-stap-springen</title>
+      <link>http://www.demorgen.be/dm/nl/1005/Meer-Sport/article/detail/1748285/2013/11/27/Scheenbeenbreuk-voor-wereldkampioen-hink-stap-springen.dhtml</link>
+      <description>De Fransman Teddy Tamgho, de huidige wereldkampioen in het hink-stap-springen, heeft zijn linkerscheenbeen gebroken tijdens het trainen. Tamgho ...</description>
+      <pubDate>Wed, 27 Nov 2013 20:14:00 GMT</pubDate>
+      <author>Hans Op de Beeck</author>
+      <guid isPermaLink="false">http://www.demorgen.be/dm/nl/1005/Meer-Sport/article/detail/1748285/2013/11/27/Scheenbeenbreuk-voor-wereldkampioen-hink-stap-springen.dhtml</guid>
+      <media:content type="image/jpeg" url="http://static2.demorgen.be/static/photo/2013/5/14/9/20131127210358/media_s_6291969.jpg">
+      <media:thumbnail url="http://static2.demorgen.be/static/photo/2013/5/14/9/20131127210358/media_s_6291969.jpg" />
+      </media:content>
+      </item>
+      <item>
+      <title>Zo zag uw gemeente eruit in de 18de eeuw</title>
+      <link>http://www.nieuwsblad.be/article/detail.aspx?articleid=dmf20131128_00861347</link>
+      <guid isPermaLink="true">http://www.nieuwsblad.be/article/detail.aspx?articleid=dmf20131128_00861347</guid>
+      <enclosure url="http://1.nieuwsbladcdn.be/Assets/Images_Upload/2013/11/28/6f6dc826-5838-11e3-8fbd-aff235d9925f_web_scale_0.6198347_0.6198347__.jpg" length="0" type="image/jpeg" />
+      <pubDate>Thu, 28 Nov 2013 15:00:00 GMT</pubDate>
+      </item>''';
+  var rssParser = new RssParser(raw_xml);
+
+  List<RssItem> items = new List<RssItem>();
+  rssParser.onProcess().listen((data) => items.add(data), // output the data
+      onError: (error) => print("Error, could not open file"),
+      onDone: () => print("Finished reading data")); 
+  
+  rssParser.onFinished.listen((_) { 
+    test('testing end result rss items', () {
+      expect(items.length, 3);
+      expect(items.first.title, "CD&amp;V wil één Vlaamse energiepremie");
+      expect(items.last.rssMediaContents.first.url, "http://1.nieuwsbladcdn.be/Assets/Images_Upload/2013/11/28/6f6dc826-5838-11e3-8fbd-aff235d9925f_web_scale_0.6198347_0.6198347__.jpg");
+    });
+  });
+}
+
