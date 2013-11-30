@@ -11,4 +11,6 @@ class RssParser {
   }
   
   Stream<RssItem> onProcess() => this.xmlObjectBuilder.onProcess();
+  
+  Stream get onFinished => this.xmlObjectBuilder.onFinished;
 }
