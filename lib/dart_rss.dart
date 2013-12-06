@@ -1,6 +1,7 @@
 library dart_rss;
 
 import 'dart:async';
+import 'package:observe/observe.dart';
 import 'package:xmlstream/xmlstream.dart';
 
 part 'objects/rss_item.dart';
