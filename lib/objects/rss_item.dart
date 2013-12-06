@@ -1,6 +1,6 @@
 part of dart_rss;
 
-class RssItem {
+class RssItem extends Observable {
   String title;
   String link;
   String description;

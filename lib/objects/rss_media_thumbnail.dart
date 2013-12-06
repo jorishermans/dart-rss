@@ -1,6 +1,6 @@
 part of dart_rss;
 
-class RssMediaThumbnail {
+class RssMediaThumbnail extends Observable {
   String url;
   String width;
   String height;

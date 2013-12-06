@@ -1,6 +1,6 @@
 part of dart_rss;
 
-class RssMediaContent {
+class RssMediaContent extends Observable {
   String type;
   String url;
   String width;
