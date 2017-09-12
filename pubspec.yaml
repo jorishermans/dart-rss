@@ -1,10 +1,10 @@
 name: rss
-version: 0.3.3
+version: 0.3.4
 author: Joris Hermans <hermansj@gmail.com>
 description: Rss parser for dart.
 homepage: https://github.com/jorishermans/dart-rss
 dependencies:
-  xmlstream: '0.8.8'
-  observe: '0.15.1'
+  xmlstream: '>=0.10.0 < 0.11.0'
+  observe: '>=0.15.1 <0.16.0'
 dev_dependencies:
   unittest: '>=0.9.0 <0.9.1'
